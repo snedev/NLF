@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Select a Currency Pair</h1>
+    <form action="/currency" method="post">
+    {% csrf_token %}
+        <select name="Pairs">
+            <option disabled selected>Select an option</option>
+            <option value="BTCUSD">BTC/USD</option>
+            <option value="ETHUSD">ETH/USD</option>
+            <option value="LTCUSD">LTC/USD</option>
+            <option value="XRPUSD">XRP/USD</option>
+            <option value="XMRUSD">XMR/USD</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %}
