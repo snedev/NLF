@@ -21,6 +21,7 @@ with open(filename, 'r') as csv_file:
             d = line['Date']
             date_formatted = time.mktime(datetime.datetime.strptime(d, "%Y-%m-%d %I-%p").timetuple())
             line['Date'] = int(date_formatted)
+            print(line['Date'])
             csv_writer.writerow(line)
 
 # Take the new csv file and create a line protocol .txt file for importing into influxDB

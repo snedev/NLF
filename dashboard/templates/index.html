@@ -3,17 +3,19 @@
 {% block content %}
 
 <div class="container">
-    <h1>Select a Currency Pair</h1>
-    <form action="/currency" method="post">
+    <h1>Select a Currency Pair and a Date Range</h1>
+    <form id="currency_selector" action="/currency" method="post">
     {% csrf_token %}
         <select name="Pairs">
-            <option disabled selected>Select an option</option>
+            <option disabled selected>Select a currency</option>
             <option value="BTCUSD">BTC/USD</option>
             <option value="ETHUSD">ETH/USD</option>
             <option value="LTCUSD">LTC/USD</option>
             <option value="XRPUSD">XRP/USD</option>
             <option value="XMRUSD">XMR/USD</option>
         </select>
+        <p>From: <input type="datetime-local" name="date_from" step=3600 form="currency_selector"</p>
+        <p>To: <input type="datetime-local" name="date_to" step=3600 form="currency_selector"></p>
         <input type="submit" value="Submit">
     </form>
 </div>
