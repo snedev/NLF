@@ -1,10 +1,11 @@
+import plotly
 import json, time, datetime
-from django.views.generic import TemplateView
-from django.shortcuts import redirect
-from influxdb import InfluxDBClient
-from django.http import JsonResponse
 import plotly.express as px
 import pandas as pd
+
+from django.shortcuts import redirect, render
+from influxdb import InfluxDBClient
+from django.http import HttpResponseRedirect
 
 
 def influxdb_client():  # An instance of the InfluxDBClient that gets data from InfluxDB
@@ -12,8 +13,11 @@ def influxdb_client():  # An instance of the InfluxDBClient that gets data from 
     return client
 
 
-class HomeView(TemplateView):
-    template_name = 'index.html'
+def index(request):
+    context = {
+        'select_currency': select_currency
+    }
+    return render(request, 'index.html', context=context)
 
 
 def select_currency(request):
@@ -27,6 +31,7 @@ def select_currency(request):
         date_to = time.mktime(datetime.datetime.strptime(date_to_unformatted, "%Y-%m-%dT%H:%M").timetuple())
         date_to = int(date_to)
         date_to = str(date_to) + "000000000"
+
         if currency == 'BTCUSD':
             query = influxdb_client().query(
                 ('select Price from BTCUSD where time > {} AND time <= {}').format(date_from, date_to))
@@ -35,8 +40,9 @@ def select_currency(request):
             df = df['series'][0]['values']
             df = pd.DataFrame(df, columns=['Date', 'Price'])  # Create Pandas dataframe to be used by Plotly
             fig = px.line(df, x='Date', y='Price')
-            fig.show()
-            return JsonResponse(json_query, safe=False)
+            plotly.offline.plot(fig, filename='dashboard/templates/plot.html', auto_open=False)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
         if currency == 'ETHUSD':
             query = influxdb_client().query(
                 ('select Price from ETHUSD where time > {} AND time <= {}').format(date_from, date_to))
@@ -45,8 +51,9 @@ def select_currency(request):
             df = df['series'][0]['values']
             df = pd.DataFrame(df, columns=['Date', 'Price'])
             fig = px.line(df, x='Date', y='Price')
-            fig.show()
-            return JsonResponse(json_query, safe=False)
+            plotly.offline.plot(fig, filename='dashboard/templates/plot.html', auto_open=False)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
         if currency == 'LTCUSD':
             query = influxdb_client().query(
                 ('select Price from LTCUSD where time > {} AND time <= {}').format(date_from, date_to))
@@ -55,8 +62,9 @@ def select_currency(request):
             df = df['series'][0]['values']
             df = pd.DataFrame(df, columns=['Date', 'Price'])
             fig = px.line(df, x='Date', y='Price')
-            fig.show()
-            return JsonResponse(json_query, safe=False)
+            plotly.offline.plot(fig, filename='dashboard/templates/plot.html', auto_open=False)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
         if currency == 'XRPUSD':
             query = influxdb_client().query(
                 ('select Price from XRPUSD where time > {} AND time <= {}').format(date_from, date_to))
@@ -65,8 +73,9 @@ def select_currency(request):
             df = df['series'][0]['values']
             df = pd.DataFrame(df, columns=['Date', 'Price'])
             fig = px.line(df, x='Date', y='Price')
-            fig.show()
-            return JsonResponse(json_query, safe=False)
+            plotly.offline.plot(fig, filename='dashboard/templates/plot.html', auto_open=False)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
         if currency == 'XMRUSD':
             query = influxdb_client().query(
                 ('select Price from XMRUSD where time > {} AND time <= {}').format(date_from, date_to))
@@ -75,7 +84,7 @@ def select_currency(request):
             df = df['series'][0]['values']
             df = pd.DataFrame(df, columns=['Date', 'Price'])
             fig = px.line(df, x='Date', y='Price')
-            fig.show()
-            return JsonResponse(json_query, safe=False)
+            plotly.offline.plot(fig, filename='dashboard/templates/plot.html', auto_open=False)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
-        return redirect('/')
+        return redirect('home')

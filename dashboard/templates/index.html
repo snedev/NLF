@@ -4,7 +4,7 @@
 
 <div class="container">
     <h1>Select a Currency Pair and a Date Range</h1>
-    <form id="currency_selector" action="/currency" method="post">
+    <form id="select_currency" action="/currency" method="post">
     {% csrf_token %}
         <select name="Pairs">
             <option disabled selected>Select a currency</option>
@@ -14,10 +14,14 @@
             <option value="XRPUSD">XRP/USD</option>
             <option value="XMRUSD">XMR/USD</option>
         </select>
-        <p>From: <input type="datetime-local" name="date_from" step=3600 form="currency_selector"</p>
-        <p>To: <input type="datetime-local" name="date_to" step=3600 form="currency_selector"></p>
+        <p>From: <input type="datetime-local" name="date_from" step=3600 form="select_currency"</p>
+        <p>To: <input type="datetime-local" name="date_to" step=3600 form="select_currency"></p>
         <input type="submit" value="Submit">
     </form>
+    <div class="plot">
+    {% include "plot.html" %}
+    </div>
 </div>
+
 
 {% endblock %}
