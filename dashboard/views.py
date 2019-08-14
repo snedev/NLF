@@ -7,9 +7,17 @@ from django.shortcuts import redirect, render
 from influxdb import InfluxDBClient
 from django.http import HttpResponseRedirect
 
+from NLF import settings
+
 
 def influxdb_client():  # An instance of the InfluxDBClient that gets data from InfluxDB
-    client = InfluxDBClient(host='127.0.0.1', port=8086, username='root', password='root', database='NLF')
+    client = InfluxDBClient(
+        settings.INFLUXDB_HOST,
+        settings.INFLUXDB_PORT,
+        settings.INFLUXDB_USERNAME,
+        settings.INFLUXDB_PASSWORD,
+        settings.INFLUXDB_DATABASE
+    )
     return client
 
 
