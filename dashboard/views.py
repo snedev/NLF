@@ -40,9 +40,9 @@ def get_data(request):
         date_to = int(date_to)
         date_to = str(date_to) + "000000000"
 
-        if currency == 'BTCUSD':
+        if currency == currency:
             query = influxdb_client().query(
-                ('select Price from BTCUSD where time > {} AND time <= {}').format(date_from, date_to))
+                ('select Price from {} where time > {} AND time <= {}').format(currency, date_from, date_to))
             json_query = json.dumps(query.raw)
             df = pd.read_json(json_query)  # Pandas read_json function to read the json data
             df = df['series'][0]['values']
@@ -51,48 +51,5 @@ def get_data(request):
             plotly.offline.plot(fig, filename='dashboard/templates/plot.html', auto_open=False)
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-        if currency == 'ETHUSD':
-            query = influxdb_client().query(
-                ('select Price from ETHUSD where time > {} AND time <= {}').format(date_from, date_to))
-            json_query = json.dumps(query.raw)
-            df = pd.read_json(json_query)
-            df = df['series'][0]['values']
-            df = pd.DataFrame(df, columns=['Date', 'Price'])
-            fig = px.line(df, x='Date', y='Price')
-            plotly.offline.plot(fig, filename='dashboard/templates/plot.html', auto_open=False)
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-        if currency == 'LTCUSD':
-            query = influxdb_client().query(
-                ('select Price from LTCUSD where time > {} AND time <= {}').format(date_from, date_to))
-            json_query = json.dumps(query.raw)
-            df = pd.read_json(json_query)
-            df = df['series'][0]['values']
-            df = pd.DataFrame(df, columns=['Date', 'Price'])
-            fig = px.line(df, x='Date', y='Price')
-            plotly.offline.plot(fig, filename='dashboard/templates/plot.html', auto_open=False)
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-        if currency == 'XRPUSD':
-            query = influxdb_client().query(
-                ('select Price from XRPUSD where time > {} AND time <= {}').format(date_from, date_to))
-            json_query = json.dumps(query.raw)
-            df = pd.read_json(json_query)
-            df = df['series'][0]['values']
-            df = pd.DataFrame(df, columns=['Date', 'Price'])
-            fig = px.line(df, x='Date', y='Price')
-            plotly.offline.plot(fig, filename='dashboard/templates/plot.html', auto_open=False)
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-        if currency == 'XMRUSD':
-            query = influxdb_client().query(
-                ('select Price from XMRUSD where time > {} AND time <= {}').format(date_from, date_to))
-            json_query = json.dumps(query.raw)
-            df = pd.read_json(json_query)
-            df = df['series'][0]['values']
-            df = pd.DataFrame(df, columns=['Date', 'Price'])
-            fig = px.line(df, x='Date', y='Price')
-            plotly.offline.plot(fig, filename='dashboard/templates/plot.html', auto_open=False)
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return redirect('home')
