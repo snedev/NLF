@@ -23,12 +23,12 @@ def influxdb_client():  # An instance of the InfluxDBClient that gets data from 
 
 def index(request):
     context = {
-        'select_currency': select_currency
+        'data_selector': get_data
     }
     return render(request, 'index.html', context=context)
 
 
-def select_currency(request):
+def get_data(request):
     if request.method == 'POST':
         currency = request.POST.get('Pairs')
         date_from_unformatted = request.POST.get('date_from')

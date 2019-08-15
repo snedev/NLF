@@ -37,7 +37,6 @@ CREATE DATABASE NLF
 # DML
 # CONTEXT-DATABASE: NLF
 
-
 """)
 for item in lines:
     output.write("%s\n" % item)
