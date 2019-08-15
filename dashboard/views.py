@@ -30,7 +30,7 @@ def index(request):
 
 def get_data(request):
     if request.method == 'POST':
-        currency = request.POST.get('Pairs')
+        currency = request.POST.get('currency_pairs')
         date_from_unformatted = request.POST.get('date_from')
         date_from = str(int(time.mktime(datetime.datetime.strptime(date_from_unformatted, "%Y-%m-%dT%H:%M").timetuple()))) + "000000000"
         date_to_unformatted = request.POST.get('date_to')

@@ -6,14 +6,16 @@
     <h1>Select a Currency Pair and a Date Range</h1>
     <form id="data_selector" action="/data" method="post">
     {% csrf_token %}
-        <select name="Pairs">
-            <option disabled selected>Select a currency</option>
-            <option value="BTCUSD">BTC/USD</option>
-            <option value="ETHUSD">ETH/USD</option>
-            <option value="LTCUSD">LTC/USD</option>
-            <option value="XRPUSD">XRP/USD</option>
-            <option value="XMRUSD">XMR/USD</option>
-        </select>
+            <input type="checkbox" name="currency_pairs" id="BTCUSD" value="BTCUSD">
+                <label for="BTCUSD">BTC/USD</label>
+            <input type="checkbox" name="currency_pairs" id="ETHUSD" value="ETHUSD">
+                <label for="ETHUSD">ETH/USD</label>
+            <input type="checkbox" name="currency_pairs" id="LTCUSD" value="LTCUSD">
+                <label for="LTCUSD">LTC/USD</label>
+            <input type="checkbox" name="currency_pairs" id="XRPUSD" value="XRPUSD">
+                <label for="XRPUSD">XRP/USD</label>
+            <input type="checkbox" name="currency_pairs" id="XMRUSD" value="XMRUSD">
+                <label for="XMRUSD">XMR/USD</label>
         <p>From: <input type="datetime-local" name="date_from" step=3600 form="data_selector"</p>
         <p>To: <input type="datetime-local" name="date_to" step=3600 form="data_selector"></p>
         <input type="submit" value="Submit">
