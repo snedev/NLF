@@ -32,13 +32,9 @@ def get_data(request):
     if request.method == 'POST':
         currency = request.POST.get('Pairs')
         date_from_unformatted = request.POST.get('date_from')
-        date_from = time.mktime(datetime.datetime.strptime(date_from_unformatted, "%Y-%m-%dT%H:%M").timetuple())
-        date_from = int(date_from)
-        date_from = str(date_from) + "000000000"
+        date_from = str(int(time.mktime(datetime.datetime.strptime(date_from_unformatted, "%Y-%m-%dT%H:%M").timetuple()))) + "000000000"
         date_to_unformatted = request.POST.get('date_to')
-        date_to = time.mktime(datetime.datetime.strptime(date_to_unformatted, "%Y-%m-%dT%H:%M").timetuple())
-        date_to = int(date_to)
-        date_to = str(date_to) + "000000000"
+        date_to = str(int(time.mktime(datetime.datetime.strptime(date_to_unformatted, "%Y-%m-%dT%H:%M").timetuple()))) + "000000000"
 
         if currency == currency:
             query = influxdb_client().query(
