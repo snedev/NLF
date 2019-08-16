@@ -3,9 +3,9 @@ import json, time, datetime
 import plotly.express as px
 import pandas as pd
 
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, render_to_response
 from influxdb import InfluxDBClient
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 
 from NLF import settings
 
@@ -19,7 +19,6 @@ def influxdb_client():  # An instance of the InfluxDBClient that gets data from 
         settings.INFLUXDB_DATABASE
     )
     return client
-
 
 def index(request):
     context = {
@@ -43,9 +42,8 @@ def get_data(request):
             df = pd.read_json(json_query)  # Pandas read_json function to read the json data
             df = df['series'][0]['values']
             df = pd.DataFrame(df, columns=['Date', 'Price'])  # Create Pandas dataframe to be used by Plotly
-            fig = px.line(df, x='Date', y='Price')
-            plotly.offline.plot(fig, filename='dashboard/templates/plot.html', auto_open=False)
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
+            Date = df['Date'].tolist()
+            Price = df['Price'].tolist()
+            return JsonResponse({'Date': Date, 'Price': Price}, safe=False)
     else:
         return redirect('home')

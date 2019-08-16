@@ -2,6 +2,31 @@
 
 {% block content %}
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+
+$(function () {
+    var frm = $('#data_selector');
+    frm.submit(function (ev) {
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+            console.log(data);
+            plot = document.getElementById('plot');
+            var date = data.Date
+            var price = data.Price
+	        Plotly.plot( plot, [{x: date, y: price }]);
+            }
+        });
+        ev.preventDefault();
+    });
+});
+
+</script>
+
 <div class="container">
     <h1>Select a Currency Pair and a Date Range</h1>
     <form id="data_selector" action="/data" method="post">
@@ -16,14 +41,11 @@
                 <label for="XRPUSD">XRP/USD</label>
             <input type="checkbox" name="currency_pairs" id="XMRUSD" value="XMRUSD">
                 <label for="XMRUSD">XMR/USD</label>
-        <p>From: <input type="datetime-local" name="date_from" step=3600 form="data_selector"</p>
-        <p>To: <input type="datetime-local" name="date_to" step=3600 form="data_selector"></p>
-        <input type="submit" value="Submit">
+        <p>From: <input type="datetime-local" name="date_from" step=3600 form="data_selector"> To: <input type="datetime-local" name="date_to" step=3600 form="data_selector"></p>
+        <input type="submit" id="submit" value="Submit">
     </form>
-    <div class="plot">
-    {% include "plot.html" %}
-    </div>
+  <!-- Plotly.js -->
+    <div id="plot"><!-- The Plotly chart goes here --></div>
 </div>
-
 
 {% endblock %}
