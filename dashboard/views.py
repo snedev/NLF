@@ -1,11 +1,9 @@
-import plotly
 import json, time, datetime
-import plotly.express as px
 import pandas as pd
 
-from django.shortcuts import redirect, render, render_to_response
+from django.shortcuts import redirect, render
 from influxdb import InfluxDBClient
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import JsonResponse
 
 from NLF import settings
 
@@ -20,9 +18,17 @@ def influxdb_client():  # An instance of the InfluxDBClient that gets data from 
     )
     return client
 
+
 def index(request):
+    cpairs = {'Bitcoin': 'BTCUSD',
+              'Ethereum': 'ETHUSD',
+              'Litecoin': 'LTCUSD',
+              'Ripple': 'XRPUSD',
+              'Monero': 'XMRUSD'
+              }
     context = {
-        'data_selector': get_data
+        'data_selector': get_data,
+        'cpairs': cpairs
     }
     return render(request, 'index.html', context=context)
 
