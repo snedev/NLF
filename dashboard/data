@@ -1,0 +1,17 @@
+> select * from BTCUSD
+{
+    "results": [
+        {
+            "series": [
+                {
+                    "name": "BTCUSD",
+                    "columns": [
+                        "time",
+                        "Price"
+                    ],
+                    "values": [
+                        [
+                            1507528800000000000,
+                            4575.4
+                        ],
+

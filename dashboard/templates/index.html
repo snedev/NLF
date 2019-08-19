@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+
+$(function () {
+    var frm = $('#data_selector');
+    frm.submit(function (ev) {
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+            console.log(data);
+            plot = document.getElementById('plot');
+            var date = data.Date
+            var price = data.Price
+	        Plotly.plot( plot, [{x: date, y: price }]);
+            }
+        });
+        ev.preventDefault();
+    });
+});
+
+</script>
+
+<div class="container">
+    <h1>Select a Currency Pair and a Date Range</h1>
+    <form id="data_selector" action="/data" method="post">
+    {% csrf_token %}
+            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Bitcoin }}" value="{{ cpairs.Bitcoin }}">
+                <label for="{{ cpairs.Bitcoin }}">{{ cpairs.Bitcoin }}</label>
+            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Ethereum }}" value="{{ cpairs.Ethereum }}">
+                <label for="{{ cpairs.Ethereum }}">{{ cpairs.Ethereum }}</label>
+            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Litecoin }}" value="{{ cpairs.Litecoin }}">
+                <label for="{{ cpairs.Litecoin }}">{{ cpairs.Litecoin }}</label>
+            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Ripple }}" value="{{ cpairs.Ripple }}">
+                <label for="{{ cpairs.Ripple }}">{{ cpairs.Ripple }}</label>
+            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Monero }}" value="{{ cpairs.Monero }}">
+                <label for="{{ cpairs.Monero }}">{{ cpairs.Monero }}</label>
+        <p>From: <input type="datetime-local" name="date_from" step=3600 form="data_selector"> To: <input type="datetime-local" name="date_to" step=3600 form="data_selector"></p>
+        <input type="submit" id="submit" value="Submit">
+    </form>
+  <!-- Plotly.js -->
+    <div id="plot"><!-- The Plotly chart goes here --></div>
+</div>
+
+{% endblock %}
