@@ -5,7 +5,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
-
 $(function () {
     var frm = $('#data_selector');
     frm.submit(function (ev) {
@@ -15,16 +14,24 @@ $(function () {
             data: frm.serialize(),
             success: function (data) {
             console.log(data);
-            plot = document.getElementById('plot');
-            var date = data.Date
-            var price = data.Price
-	        Plotly.plot( plot, [{x: date, y: price }]);
+            var plot = document.getElementById('plot');
+            var traces = [];
+            for (var key in data) {
+                if (key !== 'time') {
+                var trace = {
+                x: Object.values(data["time"]),
+                y: Object.values(data[key]),
+                name: key
+                };
+                traces.push(trace);
+            }}
+            console.log(traces);
+	        Plotly.plot( plot, traces);
             }
         });
         ev.preventDefault();
     });
 });
-
 </script>
 
 <div class="container">
