@@ -35,9 +35,13 @@ $(function () {
 </script>
 
 <div class="container">
+
     <h1>Select a Currency Pair and a Date Range</h1>
+
     <form id="data_selector" action="/data" method="post">
     {% csrf_token %}
+
+        <div id="currencies">
             <input type="checkbox" name="currency_pairs" id="{{ cpairs.Bitcoin }}" value="{{ cpairs.Bitcoin }}">
                 <label for="{{ cpairs.Bitcoin }}">{{ cpairs.Bitcoin }}</label>
             <input type="checkbox" name="currency_pairs" id="{{ cpairs.Ethereum }}" value="{{ cpairs.Ethereum }}">
@@ -48,11 +52,32 @@ $(function () {
                 <label for="{{ cpairs.Ripple }}">{{ cpairs.Ripple }}</label>
             <input type="checkbox" name="currency_pairs" id="{{ cpairs.Monero }}" value="{{ cpairs.Monero }}">
                 <label for="{{ cpairs.Monero }}">{{ cpairs.Monero }}</label>
-        <p>From: <input type="datetime-local" name="date_from" step=3600 form="data_selector"> To: <input type="datetime-local" name="date_to" step=3600 form="data_selector"></p>
+        </div>
+
+        <div id="date">
+            <p> From: <input type="datetime-local" name="date_from" step=3600 form="data_selector">
+                To: <input type="datetime-local" name="date_to" step=3600 form="data_selector">
+            </p>
+        </div>
+
+        <div id="data_analysis">
+            <h2>Instruments</h2>
+            <input type="checkbox" name="data_analysis" id="ma21" form="data_selector" value="ma21">
+                <label for="ma21">MA21</label>
+            <input type="checkbox" name="data_analysis" id="ma100" form="data_selector" value="ma100">
+                <label for="ma100">MA100</label>
+            <input type="checkbox" name="data_analysis" id="macd" form="data_selector" value="macd">
+                <label for="macd">MACD</label>
+        </div>
+
         <input type="submit" id="submit" value="Submit">
+
     </form>
+
   <!-- Plotly.js -->
+
     <div id="plot"><!-- The Plotly chart goes here --></div>
+
 </div>
 
 {% endblock %}
