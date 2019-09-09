@@ -32,6 +32,33 @@ $(function () {
         ev.preventDefault();
     });
 });
+$(function () {
+    var frm = $('#nlu_selector');
+    frm.submit(function (ev) {
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+            console.log(data);
+            var plot = document.getElementById('plot');
+            var traces = [];
+            for (var key in data) {
+                if (key !== 'time') {
+                var trace = {
+                x: Object.values(data["time"]),
+                y: Object.values(data[key]),
+                name: key
+                };
+                traces.push(trace);
+            }}
+            console.log(traces);
+	        Plotly.plot( plot, traces);
+            }
+        });
+        ev.preventDefault();
+    });
+});
 </script>
 
 <div class="container">
@@ -71,9 +98,17 @@ $(function () {
         </div>
 
         <input type="submit" id="submit" value="Submit">
-
     </form>
-
+    <div id="nlu_container">
+        <form id="nlu_selector" action="/nlu" method="post">
+        {% csrf_token %}
+        <div id="nlu_form">
+            <h1>Type in a query..</h1>
+            <input type="text" name="nlu_text" id="nlu_text" form="nlu_selector" size="80" placeholder="Ex. Plot me the Bitcoin price from 25th December 2017 to 20th January 2018">
+            <input type="submit" id="submit_nlu" value="Submit">
+        </div>
+        </form>
+    </div>
   <!-- Plotly.js -->
 
     <div id="plot"><!-- The Plotly chart goes here --></div>
