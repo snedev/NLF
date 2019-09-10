@@ -113,12 +113,3 @@ def get_nlu(request):
             return JsonResponse(instruments, safe=False)
     else:
         return redirect('home')
-
-
-
-
-
-
-
-
-
