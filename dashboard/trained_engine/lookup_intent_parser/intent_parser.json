@@ -1,0 +1,65 @@
+{
+  "config": {
+    "ignore_stop_words": true,
+    "unit_name": "lookup_intent_parser"
+  },
+  "entity_scopes": [
+    {
+      "entity_scope": {
+        "builtin": [
+          "snips/datetime"
+        ],
+        "custom": [
+          "currency"
+        ]
+      },
+      "intent_group": [
+        "createPlot"
+      ]
+    }
+  ],
+  "intents_names": [
+    "createPlot"
+  ],
+  "language_code": "en",
+  "map": {
+    "-1618195085": [
+      0,
+      [
+        0,
+        1,
+        2
+      ]
+    ],
+    "-1248858376": [
+      0,
+      [
+        0,
+        1,
+        2
+      ]
+    ],
+    "809403164": [
+      0,
+      [
+        0,
+        1,
+        2
+      ]
+    ],
+    "2101777301": [
+      0,
+      [
+        0,
+        1,
+        2
+      ]
+    ]
+  },
+  "slots_names": [
+    "currency",
+    "DateFrom",
+    "DateTo"
+  ],
+  "stop_words_whitelist": {}
+}

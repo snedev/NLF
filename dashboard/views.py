@@ -1,13 +1,10 @@
 import time, datetime
 import pandas as pd
-import io
-import json
 
 from django.shortcuts import redirect, render
 from influxdb import InfluxDBClient
 from django.http import JsonResponse
 from snips_nlu import SnipsNLUEngine
-from snips_nlu.default_configs import CONFIG_EN
 
 from NLF import settings
 
@@ -80,18 +77,11 @@ def get_data(request):
         return redirect('home')
 
 
-def nlu_engine():
-    engine = SnipsNLUEngine(config=CONFIG_EN)
-    with io.open("./dashboard/dataset.json") as f:
-        dataset = json.load(f)
-        engine.fit(dataset)
-    return engine
-
-
 def get_nlu(request):
     if request.method == 'POST':
         nlu_selector = request.POST.get('nlu_text')
-        parsing = nlu_engine().parse(nlu_selector)
+        nlu_engine = SnipsNLUEngine.from_path("./dashboard/trained_engine")
+        parsing = nlu_engine.parse(nlu_selector)
         currency_pairs = [parsing['slots'][0]['value']['value']]
         date_from_unformatted = parsing['slots'][1]['value']['value']
         date_from = str(int(time.mktime(datetime.datetime.strptime(date_from_unformatted[:16], "%Y-%m-%d %H:%M").timetuple()))) + "000000000"
