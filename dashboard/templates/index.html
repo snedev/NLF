@@ -5,7 +5,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
-
 $(function () {
     var frm = $('#data_selector');
     frm.submit(function (ev) {
@@ -15,22 +14,61 @@ $(function () {
             data: frm.serialize(),
             success: function (data) {
             console.log(data);
-            plot = document.getElementById('plot');
-            var date = data.Date
-            var price = data.Price
-	        Plotly.plot( plot, [{x: date, y: price }]);
+            var plot = document.getElementById('plot');
+            var traces = [];
+            for (var key in data) {
+                if (key !== 'time') {
+                var trace = {
+                x: Object.values(data["time"]),
+                y: Object.values(data[key]),
+                name: key
+                };
+                traces.push(trace);
+            }}
+            console.log(traces);
+	        Plotly.plot( plot, traces);
             }
         });
         ev.preventDefault();
     });
 });
-
+$(function () {
+    var frm = $('#nlu_selector');
+    frm.submit(function (ev) {
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+            console.log(data);
+            var plot = document.getElementById('plot');
+            var traces = [];
+            for (var key in data) {
+                if (key !== 'time') {
+                var trace = {
+                x: Object.values(data["time"]),
+                y: Object.values(data[key]),
+                name: key
+                };
+                traces.push(trace);
+            }}
+            console.log(traces);
+	        Plotly.plot( plot, traces);
+            }
+        });
+        ev.preventDefault();
+    });
+});
 </script>
 
 <div class="container">
+
     <h1>Select a Currency Pair and a Date Range</h1>
+
     <form id="data_selector" action="/data" method="post">
     {% csrf_token %}
+
+        <div id="currencies">
             <input type="checkbox" name="currency_pairs" id="{{ cpairs.Bitcoin }}" value="{{ cpairs.Bitcoin }}">
                 <label for="{{ cpairs.Bitcoin }}">{{ cpairs.Bitcoin }}</label>
             <input type="checkbox" name="currency_pairs" id="{{ cpairs.Ethereum }}" value="{{ cpairs.Ethereum }}">
@@ -41,11 +79,40 @@ $(function () {
                 <label for="{{ cpairs.Ripple }}">{{ cpairs.Ripple }}</label>
             <input type="checkbox" name="currency_pairs" id="{{ cpairs.Monero }}" value="{{ cpairs.Monero }}">
                 <label for="{{ cpairs.Monero }}">{{ cpairs.Monero }}</label>
-        <p>From: <input type="datetime-local" name="date_from" step=3600 form="data_selector"> To: <input type="datetime-local" name="date_to" step=3600 form="data_selector"></p>
+        </div>
+
+        <div id="date">
+            <p> From: <input type="datetime-local" name="date_from" step=3600 form="data_selector">
+                To: <input type="datetime-local" name="date_to" step=3600 form="data_selector">
+            </p>
+        </div>
+
+        <div id="data_analysis">
+            <h2>Instruments</h2>
+            <input type="checkbox" name="data_analysis" id="ma21" form="data_selector" value="ma21">
+                <label for="ma21">MA21</label>
+            <input type="checkbox" name="data_analysis" id="ma100" form="data_selector" value="ma100">
+                <label for="ma100">MA100</label>
+            <input type="checkbox" name="data_analysis" id="macd" form="data_selector" value="macd">
+                <label for="macd">MACD</label>
+        </div>
+
         <input type="submit" id="submit" value="Submit">
     </form>
+    <div id="nlu_container">
+        <form id="nlu_selector" action="/nlu" method="post">
+        {% csrf_token %}
+        <div id="nlu_form">
+            <h1>Type in a query..</h1>
+            <input type="text" name="nlu_text" id="nlu_text" form="nlu_selector" size="80" placeholder="Ex. Plot me the Bitcoin price from 25th December 2017 to 20th January 2018">
+            <input type="submit" id="submit_nlu" value="Submit">
+        </div>
+        </form>
+    </div>
   <!-- Plotly.js -->
+
     <div id="plot"><!-- The Plotly chart goes here --></div>
+
 </div>
 
 {% endblock %}

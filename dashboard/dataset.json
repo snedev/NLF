@@ -1,0 +1,167 @@
+{
+  "entities": {
+    "currency": {
+      "automatically_extensible": false,
+      "data": [
+        {
+          "synonyms": [
+            "Bitcoin",
+            "BTC"
+          ],
+          "value": "BTCUSD"
+        },
+        {
+          "synonyms": [
+            "Ethereum",
+            "ETH",
+            "Ether"
+          ],
+          "value": "ETHUSD"
+        },
+        {
+          "synonyms": [
+            "Litecoin",
+            "LTC"
+          ],
+          "value": "LTCUSD"
+        },
+        {
+          "synonyms": [
+            "Ripple",
+            "XRP"
+          ],
+          "value": "XRPUSD"
+        },
+        {
+          "synonyms": [
+            "Monero",
+            "XMR"
+          ],
+          "value": "XMRUSD"
+        }
+      ],
+      "matching_strictness": 1.0,
+      "use_synonyms": true
+    },
+    "snips/datetime": {}
+  },
+  "intents": {
+    "createPlot": {
+      "utterances": [
+        {
+          "data": [
+            {
+              "text": "Create a plot for "
+            },
+            {
+              "entity": "currency",
+              "slot_name": "currency",
+              "text": "Bitcoin"
+            },
+            {
+              "text": " from "
+            },
+            {
+              "entity": "snips/datetime",
+              "slot_name": "DateFrom",
+              "text": "25th December 2017"
+            },
+            {
+              "text": " to "
+            },
+            {
+              "entity": "snips/datetime",
+              "slot_name": "DateTo",
+              "text": "17th March 2018"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Give me a plot of the "
+            },
+            {
+              "entity": "currency",
+              "slot_name": "currency",
+              "text": "Ether"
+            },
+            {
+              "text": " price for the period "
+            },
+            {
+              "entity": "snips/datetime",
+              "slot_name": "DateFrom",
+              "text": "18th November 2016"
+            },
+            {
+              "text": " to "
+            },
+            {
+              "entity": "snips/datetime",
+              "slot_name": "DateTo",
+              "text": "22nd January 2018"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "Plot me the price of "
+            },
+            {
+              "entity": "currency",
+              "slot_name": "currency",
+              "text": "Litecoin"
+            },
+            {
+              "text": " from "
+            },
+            {
+              "entity": "snips/datetime",
+              "slot_name": "DateFrom",
+              "text": "December 2017"
+            },
+            {
+              "text": " to "
+            },
+            {
+              "entity": "snips/datetime",
+              "slot_name": "DateTo",
+              "text": "December 2018"
+            }
+          ]
+        },
+        {
+          "data": [
+            {
+              "text": "I need the price for "
+            },
+            {
+              "entity": "currency",
+              "slot_name": "currency",
+              "text": "Ripple"
+            },
+            {
+              "text": " from "
+            },
+            {
+              "entity": "snips/datetime",
+              "slot_name": "DateFrom",
+              "text": "June 2016"
+            },
+            {
+              "text": " to "
+            },
+            {
+              "entity": "snips/datetime",
+              "slot_name": "DateTo",
+              "text": "December 2017"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "language": "en"
+}

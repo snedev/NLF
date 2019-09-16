@@ -1,0 +1,28 @@
+# createPlot intent
+---
+type: intent
+name: createPlot
+slots:
+  - name: currency
+    entity: currency
+  - name: DateFrom
+    entity: snips/datetime
+  - name: DateTo
+    entity: snips/datetime
+utterances:
+  - Create a plot for [currency](Bitcoin) from [DateFrom](25th December 2017) to [DateTo](17th March 2018)
+  - Give me a plot of the [currency](Ether) price for the period [DateFrom](18th November 2016) to [DateTo](22nd January 2018)
+  - Plot me the price of [currency](Litecoin) from [DateFrom](December 2017) to [DateTo](December 2018)
+  - I need the price for [currency](Ripple) from [DateFrom](June 2016) to [DateTo](December 2017)
+
+# currency entity
+---
+type: entity
+name: currency
+automatically_extensible: no
+values:
+- [BTCUSD, Bitcoin, BTC]
+- [ETHUSD, Ethereum, ETH, Ether]
+- [LTCUSD, Litecoin, LTC]
+- [XRPUSD, Ripple, XRP]
+- [XMRUSD, Monero, XMR]
