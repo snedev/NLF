@@ -14,7 +14,7 @@ $(function () {
             data: frm.serialize(),
             success: function (data) {
             console.log(data);
-            var plot = document.getElementById('plot');
+            var graphDiv = document.getElementById('graphDiv');
             var traces = [];
             for (var key in data) {
                 if (key !== 'time') {
@@ -26,7 +26,7 @@ $(function () {
                 traces.push(trace);
             }}
             console.log(traces);
-	        Plotly.plot( plot, traces);
+	        Plotly.newPlot( graphDiv, traces);
             }
         });
         ev.preventDefault();
@@ -41,7 +41,7 @@ $(function () {
             data: frm.serialize(),
             success: function (data) {
             console.log(data);
-            var plot = document.getElementById('plot');
+            var graphDiv = document.getElementById('graphDiv');
             var traces = [];
             for (var key in data) {
                 if (key !== 'time') {
@@ -53,7 +53,7 @@ $(function () {
                 traces.push(trace);
             }}
             console.log(traces);
-	        Plotly.plot( plot, traces);
+	        Plotly.newPlot( graphDiv, traces);
             }
         });
         ev.preventDefault();
@@ -111,7 +111,7 @@ $(function () {
     </div>
   <!-- Plotly.js -->
 
-    <div id="plot"><!-- The Plotly chart goes here --></div>
+    <div id="graphDiv"><!-- The Plotly chart goes here --></div>
 
 </div>
 
