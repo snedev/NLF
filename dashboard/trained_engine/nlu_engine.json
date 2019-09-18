@@ -199,6 +199,9 @@
     "entities": {
       "currency": {
         "automatically_extensible": false
+      },
+      "indicator": {
+        "automatically_extensible": false
       }
     },
     "language_code": "en",
@@ -206,7 +209,8 @@
       "createPlot": {
         "DateFrom": "snips/datetime",
         "DateTo": "snips/datetime",
-        "currency": "currency"
+        "currency": "currency",
+        "indicator": "indicator"
       }
     }
   },

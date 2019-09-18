@@ -3,6 +3,10 @@
     {
       "entity_identifier": "currency",
       "entity_parser": "parser_1"
+    },
+    {
+      "entity_identifier": "indicator",
+      "entity_parser": "parser_2"
     }
   ]
 }

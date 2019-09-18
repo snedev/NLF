@@ -43,6 +43,35 @@
       "matching_strictness": 1.0,
       "use_synonyms": true
     },
+    "indicator": {
+      "automatically_extensible": false,
+      "data": [
+        {
+          "synonyms": [
+            "21 moving average",
+            "21 period moving average"
+          ],
+          "value": "MA21"
+        },
+        {
+          "synonyms": [
+            "moving average convergence divergence",
+            "moving average divergence",
+            "moving average convergence"
+          ],
+          "value": "MACD"
+        },
+        {
+          "synonyms": [
+            "100 moving average",
+            "100 period moving average"
+          ],
+          "value": "MA100"
+        }
+      ],
+      "matching_strictness": 1.0,
+      "use_synonyms": true
+    },
     "snips/datetime": {}
   },
   "intents": {
@@ -73,6 +102,14 @@
               "entity": "snips/datetime",
               "slot_name": "DateTo",
               "text": "17th March 2018"
+            },
+            {
+              "text": " with a "
+            },
+            {
+              "entity": "indicator",
+              "slot_name": "indicator",
+              "text": "21 moving average"
             }
           ]
         },
@@ -101,6 +138,14 @@
               "entity": "snips/datetime",
               "slot_name": "DateTo",
               "text": "22nd January 2018"
+            },
+            {
+              "text": " and use "
+            },
+            {
+              "entity": "indicator",
+              "slot_name": "indicator",
+              "text": "100 period moving average"
             }
           ]
         },
@@ -113,6 +158,14 @@
               "entity": "currency",
               "slot_name": "currency",
               "text": "Litecoin"
+            },
+            {
+              "text": " with "
+            },
+            {
+              "entity": "indicator",
+              "slot_name": "indicator",
+              "text": "moving average convergence divergence"
             },
             {
               "text": " from "
@@ -157,6 +210,14 @@
               "entity": "snips/datetime",
               "slot_name": "DateTo",
               "text": "December 2017"
+            },
+            {
+              "text": " and plot a "
+            },
+            {
+              "entity": "indicator",
+              "slot_name": "indicator",
+              "text": "21 period moving average"
             }
           ]
         }

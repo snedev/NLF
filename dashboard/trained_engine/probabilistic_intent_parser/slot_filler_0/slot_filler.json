@@ -101,6 +101,7 @@
       {
         "args": {
           "entities": [
+            "indicator",
             "currency"
           ],
           "entity_filter": {
@@ -175,12 +176,13 @@
     "tagging_scheme": 1,
     "unit_name": "crf_slot_filler"
   },
-  "crf_model_file": "modelmte3z10h.crfsuite",
+  "crf_model_file": "model0ocivvzt.crfsuite",
   "intent": "createPlot",
   "language_code": "en",
   "slot_name_mapping": {
     "DateFrom": "snips/datetime",
     "DateTo": "snips/datetime",
-    "currency": "currency"
+    "currency": "currency",
+    "indicator": "indicator"
   }
 }
