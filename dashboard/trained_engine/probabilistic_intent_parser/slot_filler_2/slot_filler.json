@@ -100,7 +100,10 @@
       },
       {
         "args": {
-          "entities": [],
+          "entities": [
+            "currency",
+            "indicator"
+          ],
           "entity_filter": {
             "automatically_extensible": false
           },
@@ -116,11 +119,7 @@
       },
       {
         "args": {
-          "entities": [
-            "MACD",
-            "MA21",
-            "MA100"
-          ],
+          "entities": [],
           "entity_filter": {
             "automatically_extensible": true
           },
@@ -177,10 +176,13 @@
     "tagging_scheme": 1,
     "unit_name": "crf_slot_filler"
   },
-  "crf_model_file": "model_kmf1t3q.crfsuite",
-  "intent": "addIndicator",
+  "crf_model_file": "modelxbnp4q3t.crfsuite",
+  "intent": "createPlotwithIndicator",
   "language_code": "en",
   "slot_name_mapping": {
-    "indicator": "MACD"
+    "DateFrom": "snips/datetime",
+    "DateTo": "snips/datetime",
+    "currency": "currency",
+    "indicator": "indicator"
   }
 }

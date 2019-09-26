@@ -197,6 +197,15 @@
   "custom_entity_parser": "custom_entity_parser",
   "dataset_metadata": {
     "entities": {
+      "MA100": {
+        "automatically_extensible": true
+      },
+      "MA21": {
+        "automatically_extensible": true
+      },
+      "MACD": {
+        "automatically_extensible": true
+      },
       "currency": {
         "automatically_extensible": false
       },
@@ -206,7 +215,15 @@
     },
     "language_code": "en",
     "slot_name_mappings": {
+      "addIndicator": {
+        "indicator": "MACD"
+      },
       "createPlot": {
+        "DateFrom": "snips/datetime",
+        "DateTo": "snips/datetime",
+        "currency": "currency"
+      },
+      "createPlotwithIndicator": {
         "DateFrom": "snips/datetime",
         "DateTo": "snips/datetime",
         "currency": "currency",

@@ -1,12 +1,24 @@
 {
   "parsers_metadata": [
     {
-      "entity_identifier": "currency",
+      "entity_identifier": "MA100",
       "entity_parser": "parser_1"
     },
     {
-      "entity_identifier": "indicator",
+      "entity_identifier": "MA21",
       "entity_parser": "parser_2"
+    },
+    {
+      "entity_identifier": "MACD",
+      "entity_parser": "parser_3"
+    },
+    {
+      "entity_identifier": "currency",
+      "entity_parser": "parser_4"
+    },
+    {
+      "entity_identifier": "indicator",
+      "entity_parser": "parser_5"
     }
   ]
 }

@@ -10,10 +10,37 @@ slots:
   - name: DateTo
     entity: snips/datetime
 utterances:
+  - Create a plot for [currency](Bitcoin) from [DateFrom](25th December 2017) to [DateTo](17th March 2018)
+  - Give me a plot of the [currency](Ether) price for the period [DateFrom](18th November 2016) to [DateTo](22nd January 2018)
+  - Plot me the price of [currency](Litecoin) from [DateFrom](December 2017) to [DateTo](December 2018)
+  - I need the price for [currency](Ripple) from [DateFrom](June 2016) to [DateTo](December 2017)
+
+# createPlotwithIndicator intent
+---
+type: intent
+name: createPlotwithIndicator
+slots:
+  - name: currency
+    entity: currency
+  - name: DateFrom
+    entity: snips/datetime
+  - name: DateTo
+    entity: snips/datetime
+utterances:
   - Create a plot for [currency](Bitcoin) from [DateFrom](25th December 2017) to [DateTo](17th March 2018) with a [indicator](21 moving average)
   - Give me a plot of the [currency](Ether) price for the period [DateFrom](18th November 2016) to [DateTo](22nd January 2018) and use [indicator](100 period moving average)
   - Plot me the price of [currency](Litecoin) with [indicator](moving average convergence divergence) from [DateFrom](December 2017) to [DateTo](December 2018)
   - I need the price for [currency](Ripple) from [DateFrom](June 2016) to [DateTo](December 2017) and plot a [indicator](21 period moving average)
+
+# addIndicator intent
+---
+type: intent
+name: addIndicator
+utterances:
+  - add a [indicator:MA21](21 moving average)
+  - can you please add a [indicator:MA100](100 period ma)
+  - please add a [indicator:MA21](21 period moving average) to the plot
+  - show me the [indicator:MACD](moving average convergence divergence) for the price
 
 # currency entity
 ---
@@ -33,6 +60,6 @@ type: entity
 name: indicator
 automatically_extensible: no
 values:
-  - [MA21, 21 moving average, 21 period moving average]
-  - [MACD, moving average convergence divergence, moving average divergence, moving average convergence]
-  - [MA100, 100 moving average, 100 period moving average]
+  - [MA21, 21 moving average, 21 period moving average, 21ma, ma21]
+  - [MACD, moving average convergence divergence, moving average divergence, moving average convergence, macd]
+  - [MA100, 100 moving average, 100 period moving average, ma100, 100ma]

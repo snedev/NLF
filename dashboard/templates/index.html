@@ -5,6 +5,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
+var jsdata = [];
 $(function () {
     var frm = $('#data_selector');
     frm.submit(function (ev) {
@@ -13,20 +14,30 @@ $(function () {
             url: frm.attr('action'),
             data: frm.serialize(),
             success: function (data) {
-            console.log(data);
+                jsdata.push(data);
             var graphDiv = document.getElementById('graphDiv');
             var traces = [];
             for (var key in data) {
                 if (key !== 'time') {
                 var trace = {
-                x: Object.values(data["time"]),
-                y: Object.values(data[key]),
-                name: key
+                    x: Object.values(data['time']),
+                    y: Object.values(data[key]),
+                    name: key
                 };
                 traces.push(trace);
             }}
-            console.log(traces);
-	        Plotly.newPlot( graphDiv, traces);
+            var layout = {
+                    overlaying: 'y'
+                };
+            for (var i = 0; i < traces.length; i++) {
+                traces[i].yaxis = 'y' + (i + 1);
+                if (i > 0) {
+                   layout['yaxis' + (i + 1)] =  {
+                       overlaying: 'y',
+                       side: 'right'
+                   }}
+            }
+	        Plotly.newPlot( graphDiv, traces, layout);
             }
         });
         ev.preventDefault();
@@ -40,19 +51,20 @@ $(function () {
             url: frm.attr('action'),
             data: frm.serialize(),
             success: function (data) {
-            console.log(data);
+                jsdata.push(data);
             var graphDiv = document.getElementById('graphDiv');
             var traces = [];
             for (var key in data) {
                 if (key !== 'time') {
                 var trace = {
-                x: Object.values(data["time"]),
+                x: Object.values(data['time']),
                 y: Object.values(data[key]),
                 name: key
                 };
                 traces.push(trace);
             }}
-            console.log(traces);
+            var input = $("<input>", { type: "hidden", name: "plot_data", value: JSON.stringify(jsdata) });
+            $('#nlu_selector').append($(input));
 	        Plotly.newPlot( graphDiv, traces);
             }
         });
@@ -89,11 +101,11 @@ $(function () {
 
         <div id="data_analysis">
             <h2>Instruments</h2>
-            <input type="checkbox" name="data_analysis" id="ma21" form="data_selector" value="ma21">
+            <input type="checkbox" name="data_analysis" id="MA21" form="data_selector" value="ma21">
                 <label for="ma21">MA21</label>
-            <input type="checkbox" name="data_analysis" id="ma100" form="data_selector" value="ma100">
+            <input type="checkbox" name="data_analysis" id="MA100" form="data_selector" value="ma100">
                 <label for="ma100">MA100</label>
-            <input type="checkbox" name="data_analysis" id="macd" form="data_selector" value="macd">
+            <input type="checkbox" name="data_analysis" id="MACD" form="data_selector" value="macd">
                 <label for="macd">MACD</label>
         </div>
 
