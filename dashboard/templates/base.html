@@ -1,69 +1,22 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
-
     <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="{% static '/css/mdb.min.css' %}" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+
         <title>NLF</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-        <meta name="google" content="notranslate" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-                crossorigin="anonymous" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     </head>
-
     <body>
-        <style>
-        .body {
-            font-family: "Open Sans";
-            font-size: 17px;
-            content-align: center;
-            background-color: #fdfdfd;
-            width: 100%;
-            position: relative;
-            z-index: 3;
-            margin: 10 0;
-            padding: 0;
-        }
-        .shadow {
-            box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
-        }
-        .navbar {
-            background-color: #00004f;
-            margin-bottom: 50px;
-            position: relative;
-            width: 100%;
-            padding: 20px;
-            height: 80px;
-            border-bottom: 1px solid #e7e7e7;
-            top: 0;
-            z-index: 9999;
-
-        }
-        .navbar-brand {
-            color: #ffffff;
-            font-family: "Open Sans";
-            font-size: 18px;
-        }
-        .footer {
-            bottom: 0;
-            height: 60px;
-            width: 100%;
-            background-color: #f4f4f8:
-        }
-        .copyright {
-            padding: 1%;
-            text-align: center;
-            font-family: "Open Sans";
-            font-size: 14px;
-        }
-        .container {
-                width: 75%;
-                margin-left: auto;
-                margin-right: auto;
-        }
-        </style>
-
         <!-- Navigation -->
         <nav class="navbar">
             <div class="container">
@@ -73,7 +26,6 @@
         {% block content %}
         <!-- Content Goes here -->
         {% endblock content %}
-
 
         <!-- Footer -->
         <footer class="footer">

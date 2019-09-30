@@ -3,7 +3,7 @@ import pandas as pd
 import json
 
 from django.shortcuts import redirect, render
-from influxdb import InfluxDBClient
+from influxdb import InfluxDBClient, DataFrameClient
 from django.http import JsonResponse
 from snips_nlu import SnipsNLUEngine
 
@@ -23,11 +23,83 @@ def influxdb_client():  # An instance of the InfluxDBClient that gets data from 
 
 
 def index(request):
-    cpairs = {'Bitcoin': 'BTCUSD',
-              'Ethereum': 'ETHUSD',
-              'Litecoin': 'LTCUSD',
-              'Ripple': 'XRPUSD',
-              'Monero': 'XMRUSD'
+    cpairs = {'AUDCAD': 'AUDCAD',
+              'AUDCHF': 'AUDCHF',
+              'AUDJPY': 'AUDJPY',
+              'AUDNZD': 'AUDNZD',
+              'AUDSEK': 'AUDSEK',
+              'AUDSGD': 'AUDSGD',
+              'AUDUSD': 'AUDUSD',
+              'CADCHF': 'CADCHF',
+              'CADJPY': 'CADJPY',
+              'CADNOK': 'CADNOK',
+              'CADSEK': 'CADSEK',
+              'CHFJPY': 'CHFJPY',
+              'CHFNOK': 'CHFNOK',
+              'CHFSEK': 'CHFSEK',
+              'DKKSEK': 'DKKSEK',
+              'EURAUD': 'EURAUD',
+              'EURCAD': 'EURCAD',
+              'EURCHF': 'EURCHF',
+              'EURCNH': 'EURCNH',
+              'EURCZK': 'EURCZK',
+              'EURDKK': 'EURDKK',
+              'EURGBP': 'EURGBP',
+              'EURHUF': 'EURHUF',
+              'EURJPY': 'EURJPY',
+              'EURMXN': 'EURMXN',
+              'EURNOK': 'EURNOK',
+              'EURNZD': 'EURNZD',
+              'EURPLN': 'EURPLN',
+              'EURSEK': 'EURSEK',
+              'EURSGD': 'EURSGD',
+              'EURTRY': 'EURTRY',
+              'EURUSD': 'EURUSD',
+              'GBPAUD': 'GBPAUD',
+              'GBPCAD': 'GBPCAD',
+              'GBPCHF': 'GBPCHF',
+              'GBPJPY': 'GBPJPY',
+              'GBPMXN': 'GBPMXN',
+              'GBPNOK': 'GBPNOK',
+              'GBPNZD': 'GBPNZD',
+              'GBPSEK': 'GBPSEK',
+              'GBPSGD': 'GBPSGD',
+              'GBPUSD': 'GBPUSD',
+              'NOKDKK': 'NOKDKK',
+              'NOKJPY': 'NOKJPY',
+              'NOKSEK': 'NOKSEK',
+              'NZDCAD': 'NZDCAD',
+              'NZDCHF': 'NZDCHF',
+              'NZDJPY': 'NZDJPY',
+              'NZDNOK': 'NZDNOK',
+              'NZDSEK': 'NZDSEK',
+              'NZDUSD': 'NZDUSD',
+              'PLNHUF': 'PLNHUF',
+              'SGDJPY': 'SGDJPY',
+              'USDCAD': 'USDCAD',
+              'USDCHF': 'USDCHF',
+              'USDCNH': 'USDCNH',
+              'USDCZK': 'USDCZK',
+              'USDDKK': 'USDDKK',
+              'USDHKD': 'USDHKD',
+              'USDHUF': 'USDHUF',
+              'USDILS': 'USDILS',
+              'USDJPY': 'USDJPY',
+              'USDMXN': 'USDMXN',
+              'USDNOK': 'USDNOK',
+              'USDPLN': 'USDPLN',
+              'USDRON': 'USDRON',
+              'USDRUB': 'USDRUB',
+              'USDSEK': 'USDSEK',
+              'USDSGD': 'USDSGD',
+              'USDTHB': 'USDTHB',
+              'USDTRY': 'USDTRY',
+              'USDZAR': 'USDZAR',
+              'XAGUSD': 'XAGUSD',
+              'XAUUSD': 'XAUUSD',
+              'XPDUSD': 'XPDUSD',
+              'XPTUSD': 'XPTUSD',
+              'ZARJPY': 'ZARJPY'
               }
     context = {
         'data_selector': get_data,
@@ -39,12 +111,13 @@ def index(request):
 def create_plot(currency_pairs, date_from, date_to):
     dataframes = []
     for currency in currency_pairs:
-        q = ('select Price from {} where time > {} AND time <= {}').format(currency, date_from, date_to)
+        q = ('select bid from {} where time > {} AND time <= {}').format(currency, date_from, date_to)
         query = influxdb_client().query(q, chunked=True, chunk_size=1000)
         query = list(query.get_points(measurement=currency))
         df = pd.DataFrame(query).set_index('time')
-        df = df.rename(columns={'Price': currency})
+        df = df.rename(columns={'bid': currency})
         dataframes.append(df)
+        print(dataframes)
     df2 = pd.DataFrame(query, columns=['time']).set_index('time')
     df_joined = pd.DataFrame.join(df2, dataframes, how='inner')
     instruments = {'time': df_joined.index.tolist()}
@@ -56,12 +129,13 @@ def create_plot(currency_pairs, date_from, date_to):
 def create_plot_with_indicator(currency_pairs, date_from, date_to, data_analysis):
     dataframes = []
     for currency in currency_pairs:
-        q = ('select Price from {} where time > {} AND time <= {}').format(currency, date_from, date_to)
+        q = ('select bid from {} where time > {} AND time <= {}').format(currency, date_from, date_to)
         query = influxdb_client().query(q, chunked=True, chunk_size=1000)
         query = list(query.get_points(measurement=currency))
         df = pd.DataFrame(query).set_index('time')
-        df = df.rename(columns={'Price': currency})
+        df = df.rename(columns={'bid': currency})
         dataframes.append(df)
+        print(dataframes)
     df2 = pd.DataFrame(query, columns=['time']).set_index('time')
     df_joined = pd.DataFrame.join(df2, dataframes, how='inner')
     instruments = {'time': df_joined.index.tolist()}
@@ -89,6 +163,7 @@ def create_plot_with_indicator(currency_pairs, date_from, date_to, data_analysis
 def get_data(request):
     if request.method == 'POST':
         currency_pairs = request.POST.getlist('currency_pairs')
+        print(currency_pairs)
         date_from_unformatted = request.POST.get('date_from')
         date_from = str(int(time.mktime(datetime.datetime.strptime(date_from_unformatted, "%Y-%m-%dT%H:%M").timetuple()))) + "000000000"
         date_to_unformatted = request.POST.get('date_to')

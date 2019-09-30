@@ -122,13 +122,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]
+
 # InfluxDB
 
 INFLUXDB_HOST = 'localhost'
 INFLUXDB_PORT = 8086
 INFLUXDB_USERNAME = 'root'
 INFLUXDB_PASSWORD = 'root'
-INFLUXDB_DATABASE = 'NLF'
+INFLUXDB_DATABASE = 'NLF2'
 INFLUXDB_TIMEOUT = 10
 INFLUXDB_HTTP_MAX_ROW_LIMIT = 1000000
 
