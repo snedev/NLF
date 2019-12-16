@@ -1,4 +1,4 @@
-NLF - Natural Language Finance - A financial dashboard created in Python/Django.
+# NLF - Natural Language Finance - A financial dashboard created in Python/Django.
 
 Using InfluxDB for timeseries currency data and Snips NLU for Natural Language Processing.
 
