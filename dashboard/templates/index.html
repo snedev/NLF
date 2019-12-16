@@ -90,98 +90,18 @@ $(function () {
 
     <form id="data_selector" action="/data" method="post">
     {% csrf_token %}
-        <select name="currency_pairs" multiple>
-            <option value="" disabled selected>Choose currency pairs</option>
-            <option value="{{ cpairs.AUDCAD }}">{{ cpairs.AUDCAD }}</option>
-            <option value="{{ cpairs.AUDCHF }}">{{ cpairs.AUDCHF }}</option>
-            <option value="{{ cpairs.AUDJPY }}">{{ cpairs.AUDJPY }}</option>
-            <option value="{{ cpairs.AUDNZD }}">{{ cpairs.AUDNZD }}</option>
-            <option value="{{ cpairs.AUDSEK }}">{{ cpairs.AUDSEK }}</option>
-            <option value="{{ cpairs.AUDSGD }}">{{ cpairs.AUDSGD }}</option>
-            <option value="{{ cpairs.AUDUSD }}">{{ cpairs.AUDUSD }}</option>
-            <option value="{{ cpairs.CADCHF }}">{{ cpairs.CADCHF }}</option>
-            <option value="{{ cpairs.CADJPY }}">{{ cpairs.CADJPY }}</option>
-            <option value="{{ cpairs.CADNOK }}">{{ cpairs.CADNOK }}</option>
-            <option value="{{ cpairs.CADSEK }}">{{ cpairs.CADSEK }}</option>
-            <option value="{{ cpairs.CHFJPY }}">{{ cpairs.CHFJPY }}</option>
-            <option value="{{ cpairs.CHFNOK }}">{{ cpairs.CHFNOK }}</option>
-            <option value="{{ cpairs.CHFSEK }}">{{ cpairs.CHFSEK }}</option>
-            <option value="{{ cpairs.DKKSEK }}">{{ cpairs.DKKSEK }}</option>
-            <option value="{{ cpairs.EURAUD }}">{{ cpairs.EURAUD }}</option>
-            <option value="{{ cpairs.EURCAD }}">{{ cpairs.EURCAD }}</option>
-            <option value="{{ cpairs.EURCHF }}">{{ cpairs.EURCHF }}</option>
-            <option value="{{ cpairs.EURCNH }}">{{ cpairs.EURCNH }}</option>
-            <option value="{{ cpairs.EURCZK }}">{{ cpairs.EURCZK }}</option>
-            <option value="{{ cpairs.EURDKK }}">{{ cpairs.EURDKK }}</option>
-            <option value="{{ cpairs.EURGBP }}">{{ cpairs.EURGBP }}</option>
-            <option value="{{ cpairs.EURHUF }}">{{ cpairs.EURHUF }}</option>
-            <option value="{{ cpairs.EURJPY }}">{{ cpairs.EURJPY }}</option>
-            <option value="{{ cpairs.EURMXN }}">{{ cpairs.EURMXN }}</option>
-            <option value="{{ cpairs.EURNOK }}">{{ cpairs.EURNOK }}</option>
-            <option value="{{ cpairs.EURNZD }}">{{ cpairs.EURNZD }}</option>
-            <option value="{{ cpairs.EURPLN }}">{{ cpairs.EURPLN }}</option>
-            <option value="{{ cpairs.EURSEK }}">{{ cpairs.EURSEK }}</option>
-            <option value="{{ cpairs.EURSGD }}">{{ cpairs.EURSGD }}</option>
-            <option value="{{ cpairs.EURTRY }}">{{ cpairs.EURTRY }}</option>
-            <option value="{{ cpairs.EURUSD }}">{{ cpairs.EURUSD }}</option>
-            <option value="{{ cpairs.GBPAUD }}">{{ cpairs.GBPAUD }}</option>
-            <option value="{{ cpairs.GBPCAD }}">{{ cpairs.GBPCAD }}</option>
-            <option value="{{ cpairs.GBPCHF }}">{{ cpairs.GBPCHF }}</option>
-            <option value="{{ cpairs.GBPJPY }}">{{ cpairs.GBPJPY }}</option>
-            <option value="{{ cpairs.GBPMXN }}">{{ cpairs.GBPMXN }}</option>
-            <option value="{{ cpairs.GBPNOK }}">{{ cpairs.GBPNOK }}</option>
-            <option value="{{ cpairs.GBPNZD }}">{{ cpairs.GBPNZD }}</option>
-            <option value="{{ cpairs.GBPSEK }}">{{ cpairs.GBPSEK }}</option>
-            <option value="{{ cpairs.GBPSGD }}">{{ cpairs.GBPSGD }}</option>
-            <option value="{{ cpairs.GBPUSD }}">{{ cpairs.GBPUSD }}</option>
-            <option value="{{ cpairs.NOKDKK }}">{{ cpairs.NOKDKK }}</option>
-            <option value="{{ cpairs.NOKJPY }}">{{ cpairs.NOKJPY }}</option>
-            <option value="{{ cpairs.NOKSEK }}">{{ cpairs.NOKSEK }}</option>
-            <option value="{{ cpairs.NZDCAD }}">{{ cpairs.NZDCAD }}</option>
-            <option value="{{ cpairs.NZDCHF }}">{{ cpairs.NZDCHF }}</option>
-            <option value="{{ cpairs.NZDJPY }}">{{ cpairs.NZDJPY }}</option>
-            <option value="{{ cpairs.NZDNOK }}">{{ cpairs.NZDNOK }}</option>
-            <option value="{{ cpairs.NZDSEK }}">{{ cpairs.NZDSEK }}</option>
-            <option value="{{ cpairs.NZDUSD }}">{{ cpairs.NZDUSD }}</option>
-            <option value="{{ cpairs.PLNHUF }}">{{ cpairs.PLNHUF }}</option>
-            <option value="{{ cpairs.SGDJPY }}">{{ cpairs.SGDJPY }}</option>
-            <option value="{{ cpairs.USDCAD }}">{{ cpairs.USDCAD }}</option>
-            <option value="{{ cpairs.USDCHF }}">{{ cpairs.USDCHF }}</option>
-            <option value="{{ cpairs.USDCNH }}">{{ cpairs.USDCNH }}</option>
-            <option value="{{ cpairs.USDCZK }}">{{ cpairs.USDCZK }}</option>
-            <option value="{{ cpairs.USDDKK }}">{{ cpairs.USDDKK }}</option>
-            <option value="{{ cpairs.USDHKD }}">{{ cpairs.USDHKD }}</option>
-            <option value="{{ cpairs.USDHUF }}">{{ cpairs.USDHUF }}</option>
-            <option value="{{ cpairs.USDILS }}">{{ cpairs.USDILS }}</option>
-            <option value="{{ cpairs.USDJPY }}">{{ cpairs.USDJPY }}</option>
-            <option value="{{ cpairs.USDMXN }}">{{ cpairs.USDMXN }}</option>
-            <option value="{{ cpairs.USDNOK }}">{{ cpairs.USDNOK }}</option>
-            <option value="{{ cpairs.USDPLN }}">{{ cpairs.USDPLN }}</option>
-            <option value="{{ cpairs.USDRON }}">{{ cpairs.USDRON }}</option>
-            <option value="{{ cpairs.USDRUB }}">{{ cpairs.USDRUB }}</option>
-            <option value="{{ cpairs.USDSEK }}">{{ cpairs.USDSEK }}</option>
-            <option value="{{ cpairs.USDSGD }}">{{ cpairs.USDSGD }}</option>
-            <option value="{{ cpairs.USDTHB }}">{{ cpairs.USDTHB }}</option>
-            <option value="{{ cpairs.USDTRY }}">{{ cpairs.USDTRY }}</option>
-            <option value="{{ cpairs.USDZAR }}">{{ cpairs.USDZAR }}</option>
-            <option value="{{ cpairs.XAGUSD }}">{{ cpairs.XAGUSD }}</option>
-            <option value="{{ cpairs.XAUUSD }}">{{ cpairs.XAUUSD }}</option>
-            <option value="{{ cpairs.XPDUSD }}">{{ cpairs.XPDUSD }}</option>
-            <option value="{{ cpairs.XPTUSD }}">{{ cpairs.XPTUSD }}</option>
-            <option value="{{ cpairs.ZARJPY }}">{{ cpairs.ZARJPY }}</option>
-        </select>
-<!--        <div id="currencies">-->
-<!--            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Bitcoin }}" value="{{ cpairs.Bitcoin }}">-->
-<!--                <label for="{{ cpairs.Bitcoin }}">{{ cpairs.Bitcoin }}</label>-->
-<!--            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Ethereum }}" value="{{ cpairs.Ethereum }}">-->
-<!--                <label for="{{ cpairs.Ethereum }}">{{ cpairs.Ethereum }}</label>-->
-<!--            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Litecoin }}" value="{{ cpairs.Litecoin }}">-->
-<!--                <label for="{{ cpairs.Litecoin }}">{{ cpairs.Litecoin }}</label>-->
-<!--            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Ripple }}" value="{{ cpairs.Ripple }}">-->
-<!--                <label for="{{ cpairs.Ripple }}">{{ cpairs.Ripple }}</label>-->
-<!--            <input type="checkbox" name="currency_pairs" id="{{ cpairs.EURUSD }}" value="{{ cpairs.EURUSD }}">-->
-<!--                <label for="{{ cpairs.EURUSD }}">{{ cpairs.EURUSD }}</label>-->
-<!--        </div>-->
+        <div id="currencies">
+            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Bitcoin }}" value="{{ cpairs.Bitcoin }}">
+                <label for="{{ cpairs.Bitcoin }}">{{ cpairs.Bitcoin }}</label>
+            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Ethereum }}" value="{{ cpairs.Ethereum }}">
+                <label for="{{ cpairs.Ethereum }}">{{ cpairs.Ethereum }}</label>
+            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Litecoin }}" value="{{ cpairs.Litecoin }}">
+                <label for="{{ cpairs.Litecoin }}">{{ cpairs.Litecoin }}</label>
+            <input type="checkbox" name="currency_pairs" id="{{ cpairs.Ripple }}" value="{{ cpairs.Ripple }}">
+                <label for="{{ cpairs.Ripple }}">{{ cpairs.Ripple }}</label>
+            <input type="checkbox" name="currency_pairs" id="{{ cpairs.EURUSD }}" value="{{ cpairs.EURUSD }}">
+                <label for="{{ cpairs.EURUSD }}">{{ cpairs.EURUSD }}</label>
+        </div>
 
         <div id="date">
             <p> From: <input type="datetime-local" name="date_from" form="data_selector">
