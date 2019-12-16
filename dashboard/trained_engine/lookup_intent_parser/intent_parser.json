@@ -1,0 +1,155 @@
+{
+  "config": {
+    "ignore_stop_words": true,
+    "unit_name": "lookup_intent_parser"
+  },
+  "entity_scopes": [
+    {
+      "entity_scope": {
+        "builtin": [],
+        "custom": [
+          "MACD",
+          "MA100",
+          "MA21"
+        ]
+      },
+      "intent_group": [
+        "addIndicator"
+      ]
+    },
+    {
+      "entity_scope": {
+        "builtin": [
+          "snips/datetime"
+        ],
+        "custom": [
+          "currency"
+        ]
+      },
+      "intent_group": [
+        "createPlot"
+      ]
+    },
+    {
+      "entity_scope": {
+        "builtin": [
+          "snips/datetime"
+        ],
+        "custom": [
+          "currency",
+          "indicator"
+        ]
+      },
+      "intent_group": [
+        "createPlotwithIndicator"
+      ]
+    }
+  ],
+  "intents_names": [
+    "addIndicator",
+    "createPlot",
+    "createPlotwithIndicator"
+  ],
+  "language_code": "en",
+  "map": {
+    "-1898420239": [
+      0,
+      [
+        0
+      ]
+    ],
+    "-1809830702": [
+      2,
+      [
+        1,
+        0,
+        2,
+        3
+      ]
+    ],
+    "-1618195085": [
+      1,
+      [
+        1,
+        2,
+        3
+      ]
+    ],
+    "-1339058959": [
+      2,
+      [
+        1,
+        2,
+        3,
+        0
+      ]
+    ],
+    "-1248858376": [
+      1,
+      [
+        1,
+        2,
+        3
+      ]
+    ],
+    "-95197082": [
+      2,
+      [
+        1,
+        2,
+        3,
+        0
+      ]
+    ],
+    "-61914355": [
+      0,
+      [
+        0
+      ]
+    ],
+    "340793541": [
+      2,
+      [
+        1,
+        2,
+        3,
+        0
+      ]
+    ],
+    "694722868": [
+      0,
+      [
+        0
+      ]
+    ],
+    "809403164": [
+      1,
+      [
+        1,
+        2,
+        3
+      ]
+    ],
+    "1053022825": [
+      0,
+      [
+        0
+      ]
+    ],
+    "2101777301": [
+      1,
+      [
+        1,
+        2,
+        3
+      ]
+    ]
+  },
+  "slots_names": [
+    "indicator",
+    "currency",
+    "DateFrom",
+    "DateTo"
+  ],
+  "stop_words_whitelist": {}
+}

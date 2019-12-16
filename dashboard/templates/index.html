@@ -60,15 +60,31 @@ $(function () {
     });
 });
 </script>
+<div id="nlu_container" class="box">
+        <form id="nlu_selector" action="/nlu" method="post">
+        {% csrf_token %}
+        <div id="nlu_form">
+            <h1 class="title">Type in a query..</h1>
+            <input type="text" class="input" name="nlu_text" id="nlu_text" form="nlu_selector" size="80" placeholder="Ex. Plot me the Bitcoin price from 25th December 2017 to 20th January 2018">
+            <input type="submit" class="button is-link is-large" id="submit_nlu" value="Create plot">
+        </div>
+        </form>
+    </div>
+<div class="box">
+    <div id="plot">
+    <!-- The Plotly chart goes here -->
+</div>
+</div>
 
-<div class="container">
-
-    <h1>Select a Currency Pair and a Date Range</h1>
-
+<div class="box">
+    <h1 class="title">Manual Selector</h1>
+      <h2 class="subtitle">
+          Select a <strong>currency pair</strong> and a <strong>date range</strong> from the options below.
+      </h2>
     <form id="data_selector" action="/data" method="post">
     {% csrf_token %}
 
-        <div id="currencies">
+        <div id="currencies" class="label checkbox">
             <input type="checkbox" name="currency_pairs" id="{{ cpairs.Bitcoin }}" value="{{ cpairs.Bitcoin }}">
                 <label for="{{ cpairs.Bitcoin }}">{{ cpairs.Bitcoin }}</label>
             <input type="checkbox" name="currency_pairs" id="{{ cpairs.Ethereum }}" value="{{ cpairs.Ethereum }}">
@@ -81,14 +97,15 @@ $(function () {
                 <label for="{{ cpairs.Monero }}">{{ cpairs.Monero }}</label>
         </div>
 
-        <div id="date">
+        <div id="date" class="field">
             <p> From: <input type="datetime-local" name="date_from" step=3600 form="data_selector">
                 To: <input type="datetime-local" name="date_to" step=3600 form="data_selector">
             </p>
         </div>
-
-        <div id="data_analysis">
-            <h2>Instruments</h2>
+        <div id="data_analysis" class="label checkbox">
+            <h2 class="subtitle">
+                    Add an indicator (optional).
+                </h2>
             <input type="checkbox" name="data_analysis" id="ma21" form="data_selector" value="ma21">
                 <label for="ma21">MA21</label>
             <input type="checkbox" name="data_analysis" id="ma100" form="data_selector" value="ma100">
@@ -96,23 +113,8 @@ $(function () {
             <input type="checkbox" name="data_analysis" id="macd" form="data_selector" value="macd">
                 <label for="macd">MACD</label>
         </div>
-
-        <input type="submit" id="submit" value="Submit">
+        <input type="submit" class="button is-link" id="submit" value="Submit">
     </form>
-    <div id="nlu_container">
-        <form id="nlu_selector" action="/nlu" method="post">
-        {% csrf_token %}
-        <div id="nlu_form">
-            <h1>Type in a query..</h1>
-            <input type="text" name="nlu_text" id="nlu_text" form="nlu_selector" size="80" placeholder="Ex. Plot me the Bitcoin price from 25th December 2017 to 20th January 2018">
-            <input type="submit" id="submit_nlu" value="Submit">
-        </div>
-        </form>
-    </div>
-  <!-- Plotly.js -->
-
-    <div id="plot"><!-- The Plotly chart goes here --></div>
-
 </div>
 
 {% endblock %}
